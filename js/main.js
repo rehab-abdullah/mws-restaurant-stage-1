@@ -156,12 +156,16 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
  * Create restaurant HTML.
  */
 createRestaurantHTML = (restaurant) => {
+  const div = document.createElement('div');
   const li = document.createElement('li');
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  li.append(image);
+  image.alt = `image of ${restaurant.name} `;
+  li.append(div);
+  div.append(image);
+
 
   const name = document.createElement('h1');
   name.innerHTML = restaurant.name;
@@ -178,6 +182,8 @@ createRestaurantHTML = (restaurant) => {
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
+  //jump correctly from Home -> Both filters -> Restaurant items, by add a tab index attribute
+  more.tabIndex='3';
   li.append(more)
 
   return li
